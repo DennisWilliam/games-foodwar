@@ -9,6 +9,7 @@ public class Player: EntityBehavior2D<EntityTopDown2D, WeaponBase> //: EntityBeh
     // Start is called before the first frame update
     void Start()
     {
+        createEntityHealthOnTop();
         WBInstance = new Pistol(true, 0.3f, 2,10, 5);
         EBInstance = new EntityTopDown2D();
         initTopDown2D(true, 10, GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>());

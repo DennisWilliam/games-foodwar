@@ -10,11 +10,16 @@ namespace DNSCoreMechanics.Behaviors.Entities
 {
     public class EntityBehavior2D<EB, WB> : MonoBehaviour, IEntityBehavior where EB : IEntityBehavior where WB : WeaponBase
     {
+
         protected EB EBInstance;
         protected WB WBInstance;
+
+        [Header("Health Settings")]
+        [SerializeField] protected int health;
+        [SerializeField] protected Transform healthBarPrefab;
+
         [Header("Behavior Settings (Required)")]
         [SerializeField] protected bool isAIControl;
-        [SerializeField] protected int health;
         [SerializeField] protected int hasShield;
         //protected WeaponBehavior2D weaponBehavior;
         protected Camera cam;
@@ -54,6 +59,15 @@ namespace DNSCoreMechanics.Behaviors.Entities
         public void hasCollision()
         {
             EBInstance.hasCollision();
+        }
+
+        public void createEntityHealthOnTop()
+        {
+            HealthSystem hs = new HealthSystem(health);
+            Transform hbTransform = Instantiate(healthBarPrefab, new Vector3(0,10), Quaternion.identity);
+            HealthBar healthBar = hbTransform.GetComponent<HealthBar>();
+            healthBar.Setup(hs, "HealthSprite");
+
         }
 
         public void InitializeEntityBehaviorRequiredConfigs(float movementSpeed, float jumpPower)
