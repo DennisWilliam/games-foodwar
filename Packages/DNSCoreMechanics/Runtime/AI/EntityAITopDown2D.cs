@@ -6,11 +6,11 @@ using DNSCoreMechanics.ScriptObjects;
 using DNSCoreMechanics.Utils;
 using DNSCoreMechanics.Intefaces;
 
-public class EntityAITopDown2D : EntityBehavior2D<EntityTopDown2D>, IEntityAI
+public class EntityAITopDown2D : EntityBehavior2D<EntityTopDown2D, WeaponBase>, IEntityAI
 {
     [Header("AI Settings (Required)")]
     [SerializeField] public EntityBaseSO entityScriptObject;
-    [SerializeField] GameObject target;
+    [SerializeField] protected GameObject target;
     protected float distanceToTarget;
 
     [Header("Chase Settings (Required only if chase is used)")]

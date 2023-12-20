@@ -6,7 +6,7 @@ using DNSCoreMechanics.Intefaces;
 using DNSCoreMechanics.ScriptObjects;
 using DNSCoreMechanics.Utils;
 
-public class EntityAIPlataform2D : EntityBehavior2D<EntityPlataform2D>, IEntityAI
+public class EntityAIPlataform2D : EntityBehavior2D<EntityPlataform2D, WeaponBase>, IEntityAI
 {
     [Header("AI Configs")]
     public EntityBaseSO entityScriptObject;

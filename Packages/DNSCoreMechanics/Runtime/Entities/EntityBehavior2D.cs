@@ -8,14 +8,16 @@ using UnityEngine.EventSystems;
 
 namespace DNSCoreMechanics.Behaviors.Entities
 {
-    public class EntityBehavior2D<EB> : MonoBehaviour, IEntityBehavior where EB : IEntityBehavior
+    public class EntityBehavior2D<EB, WB> : MonoBehaviour, IEntityBehavior where EB : IEntityBehavior where WB : WeaponBase
     {
         protected EB EBInstance;
+        protected WB WBInstance;
         [Header("Behavior Settings (Required)")]
         [SerializeField] protected bool isAIControl;
         [SerializeField] protected int health;
         [SerializeField] protected int hasShield;
-        protected WeaponBehavior2D weaponBehavior;
+        //protected WeaponBehavior2D weaponBehavior;
+        protected Camera cam;
 
         [Header("Moving Settings TopDown 2D")]
         [SerializeField] public float movementSpeed;
@@ -29,13 +31,17 @@ namespace DNSCoreMechanics.Behaviors.Entities
         protected bool isDashing;
         protected bool canDash;
 
+        [Header("Weapon Settings (Required if entity can shoot)")]
+        [SerializeField] protected  GameObject bullet;
+        [SerializeField] protected Transform bulletTransform;
+
         [Header("Animation Settings 2D")]
         [SerializeField] protected Animator anim;
 
         public void Dash(bool isDashing, bool canDash, Rigidbody2D rb, float dashSpeed, float dashDuration, int dashCooldown)
         {
             Vector2 moveDirection = BehaviorsUtils.getNormalizedMoveDirection();
-            Vector2 mousePosition = BehaviorsUtils.getCameraMousePosition();
+            //Vector2 mousePosition = BehaviorsUtils.getCameraMousePosition();
 
             if (Input.GetKeyDown(KeyCode.Space) && canDash)
             {
@@ -60,11 +66,6 @@ namespace DNSCoreMechanics.Behaviors.Entities
             EBInstance.Jump();
         }
 
-        public void MeleeAtack()
-        {
-            EBInstance.MeleeAtack();
-        }
-
         public void Move(Transform entityTransform, Animator anim, float movementSpeed, GameObject lookAtDirection)
         {
             EBInstance.Move(entityTransform, anim, movementSpeed, lookAtDirection);
@@ -74,14 +75,12 @@ namespace DNSCoreMechanics.Behaviors.Entities
         {
             EBInstance.Respawn();
         }
-
-        public void Shoot()
+        public void initTopDown2D(bool canDash, float movementSpeed, Camera cam)
         {
-            EBInstance.Shoot();
+            this.canDash = canDash;
+            this.movementSpeed = movementSpeed;
+            this.cam = cam;
         }
-
-        
     }
-
 }
 

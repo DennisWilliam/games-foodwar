@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour, IWeaponBehavior
+public class Weapon : MonoBehaviour,  IWeaponBehavior
 {
     [Header("Shooting RigidBody Settings")]
     protected bool canShoot;
@@ -40,7 +40,7 @@ public class Weapon : MonoBehaviour, IWeaponBehavior
         }
         else
         {
-            Shooting();
+         //   Shooting();
         }
     }
 
@@ -59,7 +59,7 @@ public class Weapon : MonoBehaviour, IWeaponBehavior
         throw new System.NotImplementedException();
     }
 
-    public void Shooting()
+    public void Shooting(Camera cam, Vector3 mousePos, Transform entityTransform)
     {
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
         Vector3 rotation = mousePos - transform.position;
@@ -124,5 +124,25 @@ public class Weapon : MonoBehaviour, IWeaponBehavior
             canShoot = false;
             ExecuteMouseClickAction();
         }
+    }
+
+    public void MeleeAttack()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void CreateBullet()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void Shooting(Camera cam, Vector3 mousePos, Transform entityTransform, WeaponBase.CreateBulletDelegate delegate_createBullet)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void AIShooting(GameObject target, Transform entityTransform, WeaponBase.CreateBulletDelegate delegate_createBullet)
+    {
+        throw new System.NotImplementedException();
     }
 }
