@@ -41,6 +41,10 @@ public class Player: EntityBehavior2D<EntityTopDown2D, WeaponBase> //: EntityBeh
 
     protected void OnTriggerEnter2D(Collider2D collision)
     {
-        hs.Damage(10);
+        if (collision.gameObject.tag != null && collision.gameObject.tag.Equals("Bullet"))
+        {
+            int dammage = collision.gameObject.GetComponent<Bullet>().dammage;
+            hs.Damage(dammage);
+        }
     }
 }

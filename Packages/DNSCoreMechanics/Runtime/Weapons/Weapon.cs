@@ -104,25 +104,28 @@ public class Weapon : MonoBehaviour,  IWeaponBehavior
 
     public void AIShooting()
     {
-        Vector3 rotation = player.transform.position - transform.position;
-        float rotationZ = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
-
-        transform.rotation = Quaternion.Euler(0, 0, rotationZ);
-
-        if (!canShoot)
+        if (!Object.ReferenceEquals(player, null))
         {
-            timer += Time.deltaTime;
-            if (timer > timeBetweenFiring)
+            Vector3 rotation = player.transform.position - transform.position;
+            float rotationZ = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
+
+            transform.rotation = Quaternion.Euler(0, 0, rotationZ);
+
+            if (!canShoot)
             {
-                canShoot = true;
-                timer = 0;
+                timer += Time.deltaTime;
+                if (timer > timeBetweenFiring)
+                {
+                    canShoot = true;
+                    timer = 0;
+                }
             }
-        }
-        if (canShoot && isAI)
-        {
+            if (canShoot && isAI)
+            {
 
-            canShoot = false;
-            ExecuteMouseClickAction();
+                canShoot = false;
+                ExecuteMouseClickAction();
+            }
         }
     }
 

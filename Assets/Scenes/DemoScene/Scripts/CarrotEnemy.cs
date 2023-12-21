@@ -20,7 +20,7 @@ public class CarrotEnemy : EntityAITopDown2D //: EnemyCoreAI
     // Update is called once per frame
     void Update()
     {
-        Chase();
+       // Chase();
         Vector3 mousePosition = BehaviorsUtils.getCameraMousePosition();
         WBInstance.AIShooting(target,bulletTransform, ExecuteMouseClickAction);
     }
@@ -38,6 +38,10 @@ public class CarrotEnemy : EntityAITopDown2D //: EnemyCoreAI
 
     protected void OnTriggerEnter2D(Collider2D collision)
     {
-        hs.Damage(10);
+        if (collision.gameObject.tag != null && collision.gameObject.tag.Equals("Bullet"))
+        {
+            int dammage = collision.gameObject.GetComponent<Bullet>().dammage;
+            hs.Damage(dammage);
+        }
     }
 }

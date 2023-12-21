@@ -70,7 +70,6 @@ public class Pistol : WeaponBase
         reloadTime.Wait();
         if (ammoQtd == 0)
         {
-            Debug.Log("Reload");
             ammoQtd += gunMagazine;
             reloadTime.RedefineTime(10, false);
         }

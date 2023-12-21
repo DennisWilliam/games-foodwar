@@ -69,7 +69,7 @@ namespace DNSCoreMechanics.Behaviors.Entities
             hbTransform.transform.parent = transform;
             hbTransform.transform.localPosition = new Vector3(-1, 1.50f, 0);
             HealthBar healthBar = hbTransform.GetComponent<HealthBar>();
-            healthBar.Setup(hs, "Bar"); 
+            healthBar.Setup(hs, "Bar", gameObject); 
 
         }
 

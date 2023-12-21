@@ -6,8 +6,9 @@ public class Bullet : MonoBehaviour
     Vector3 mousePos;
     Camera cam;
     Rigidbody2D rb;
-    public float force;
+    [SerializeField] public float force;
     public bool isAI;
+    [SerializeField] public int dammage;
 
     // Start is called before the first frame update
     void Start()
