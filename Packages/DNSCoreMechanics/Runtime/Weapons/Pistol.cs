@@ -82,7 +82,7 @@ public class Pistol : WeaponBase
         Vector3 rotation = mousePos - entityTransform.position;
         float rotationZ = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
 
-        entityTransform.rotation = Quaternion.Euler(0, 0, rotationZ);
+        //entityTransform.rotation = Quaternion.Euler(0, 0, rotationZ);
 
         if (!shootTime.releaseAction)
         {

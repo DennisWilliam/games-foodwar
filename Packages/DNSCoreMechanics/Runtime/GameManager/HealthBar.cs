@@ -15,7 +15,7 @@ public class HealthBar : MonoBehaviour
         healthSystem.OnHealthChanged += HealthSystem_OnHealthChanged;
     }
 
-    private void HealthSystem_OnHealthChanged(object semder, System.EventArgs e)
+    private void HealthSystem_OnHealthChanged(object sender, System.EventArgs e)
     {
         transform.Find(healthBarName).localScale = new Vector3(healthSystem.GetHealthPercent(), 1);
     }

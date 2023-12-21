@@ -17,6 +17,7 @@ namespace DNSCoreMechanics.Behaviors.Entities
         [Header("Health Settings")]
         [SerializeField] protected int health;
         [SerializeField] protected Transform healthBarPrefab;
+        protected HealthSystem hs;
 
         [Header("Behavior Settings (Required)")]
         [SerializeField] protected bool isAIControl;
@@ -63,10 +64,12 @@ namespace DNSCoreMechanics.Behaviors.Entities
 
         public void createEntityHealthOnTop()
         {
-            HealthSystem hs = new HealthSystem(health);
-            Transform hbTransform = Instantiate(healthBarPrefab, new Vector3(0,10), Quaternion.identity);
+            hs = new HealthSystem(health);
+            Transform hbTransform = Instantiate(healthBarPrefab, transform.position, Quaternion.identity);
+            hbTransform.transform.parent = transform;
+            hbTransform.transform.localPosition = new Vector3(-1, 1.50f, 0);
             HealthBar healthBar = hbTransform.GetComponent<HealthBar>();
-            healthBar.Setup(hs, "HealthSprite");
+            healthBar.Setup(hs, "Bar"); 
 
         }
 
@@ -95,6 +98,7 @@ namespace DNSCoreMechanics.Behaviors.Entities
             this.movementSpeed = movementSpeed;
             this.cam = cam;
         }
+
     }
 }
 

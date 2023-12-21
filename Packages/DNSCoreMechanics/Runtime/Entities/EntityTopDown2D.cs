@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DNSCoreMechanics.Intefaces;
 using DNSCoreMechanics.Utils;
+using UnityEngine.UIElements;
 
 namespace DNSCoreMechanics.TopDown2D.Entities
 {
@@ -83,14 +84,15 @@ public class EntityTopDown2D: IEntityBehavior
         lookAtDirection.transform.rotation = BehaviorsUtils.RotateAtFront(movement.x, movement.y);
     }
 
-    public void MoveWithRigidBody(Rigidbody2D rb, float movementSpeed)
+    public void MoveWithRigidBody(Rigidbody2D rb, float movementSpeed, GameObject lookAtDirection)
     {
         Vector2 moveDirection = BehaviorsUtils.getNormalizedMoveDirection();
         Vector2 mousePosition = BehaviorsUtils.getCameraMousePosition();
         rb.velocity = new Vector2(moveDirection.x * movementSpeed, moveDirection.y * movementSpeed);
         Vector2 aimDirection = mousePosition - rb.position;
-        float aimAngle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg - 90f;
-        rb.rotation = aimAngle;
+        float aimAngle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg ;
+        lookAtDirection.transform.rotation = Quaternion.Euler(0, 0, aimAngle);
+        //rb.rotation = aimAngle;
     }
 
     public void Respawn()

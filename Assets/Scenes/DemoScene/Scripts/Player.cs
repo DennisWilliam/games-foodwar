@@ -19,13 +19,13 @@ public class Player: EntityBehavior2D<EntityTopDown2D, WeaponBase> //: EntityBeh
     void Update()
     {
         Vector3 mousePosition = BehaviorsUtils.getCameraMousePosition();
-        WBInstance.Shooting(cam, mousePosition, transform, ExecuteMouseClickAction);
+        WBInstance.Shooting(cam, mousePosition, lookAtDirection.transform, ExecuteMouseClickAction);
         //  ExecuteDash();
     }
 
     private void FixedUpdate()
     {
-        EBInstance.MoveWithRigidBody(rb,movementSpeed);
+        EBInstance.MoveWithRigidBody(rb,movementSpeed, lookAtDirection);
     }
 
     private void ExecuteMouseClickAction()
@@ -37,5 +37,10 @@ public class Player: EntityBehavior2D<EntityTopDown2D, WeaponBase> //: EntityBeh
                 Quaternion.identity
                 );
         Destroy(bulletInstance, 5);
+    }
+
+    protected void OnTriggerEnter2D(Collider2D collision)
+    {
+        hs.Damage(10);
     }
 }

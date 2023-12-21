@@ -1,6 +1,7 @@
 using DNSCoreMechanics.Utils;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 //using DNSCoreMechanics.AI;
 public class CarrotEnemy : EntityAITopDown2D //: EnemyCoreAI
@@ -8,6 +9,7 @@ public class CarrotEnemy : EntityAITopDown2D //: EnemyCoreAI
     // Start is called before the first frame update
     void Start()
     {
+        createEntityHealthOnTop();
         WBInstance = new Pistol(true, 0.5f, 2, 10, 5);
         EBInstance = new EntityTopDown2D();
         movementSpeed = 5;
@@ -32,5 +34,10 @@ public class CarrotEnemy : EntityAITopDown2D //: EnemyCoreAI
                 Quaternion.identity
                 );
         Destroy(bulletInstance, 5);
+    }
+
+    protected void OnTriggerEnter2D(Collider2D collision)
+    {
+        hs.Damage(10);
     }
 }
